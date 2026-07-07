@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Outlet, NavLink, Link, useNavigate } from 'react-router-dom';
+import { Outlet, NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function Icon({ name }) {
@@ -38,9 +38,13 @@ function SidebarLink({ to, icon, children, end }) {
 export default function Layout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [showQuickAdd, setShowQuickAdd] = useState(false);
 
   const handleLogout = () => { logout(); navigate('/login'); };
+  
+  const hideFabRoutes = ['/stock/new', '/accessories/new', '/login'];
+  const showFab = !hideFabRoutes.includes(location.pathname);
 
   return (
     <div className="app-layout">
@@ -117,9 +121,11 @@ export default function Layout() {
       </nav>
 
       {/* FAB — Quick Add (mobile) */}
-      <button className="fab" onClick={() => setShowQuickAdd(true)} aria-label="Quick Add">
-        +
-      </button>
+      {showFab && (
+        <button className="fab" onClick={() => setShowQuickAdd(true)} aria-label="Quick Add">
+          +
+        </button>
+      )}
 
       {/* Quick Add Bottom Sheet */}
       {showQuickAdd && (
