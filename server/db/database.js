@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 
-const SUPABASE_DB_URL = process.env.SUPABASE_DB_URL;
+const SUPABASE_DB_URL = process.env.SUPABASE_DB_URL || 'postgresql://postgres.zovnqtgfikpkrvjuvwso:Pn7ccMQVlRHuZYQx@aws-0-ap-northeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true';
 
 let pool = null;
 let dbWrapper = null;
