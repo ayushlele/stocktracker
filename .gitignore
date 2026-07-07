@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+.DS_Store
+server/uploads/
+server/db/fabric_tracker.db
+server/db/fabric_tracker.db-journal
+client/dist/
+coverage/
+*.log
